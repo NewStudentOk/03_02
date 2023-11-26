@@ -7,16 +7,9 @@ public:
     std::string answer;
     std::string oper;
 
-    Counter(std::string answer, std::string oper, int start) {
-        this->answer = answer;
-        this->oper = oper;
-        this->start = start;
-    }
 
     Counter() {
-        answer = "Неизвестно";
-        oper = "Неизвестно";
-        start = 1;
+        this->start = 1;
     }
 
     int getStart() const //геттер смотрим значение поля start
@@ -29,14 +22,12 @@ public:
         start = value;
     }
 
-    int add() {
+    void add() {
         start = start + 1;
-        return start;
     }
 
-    int subtract_start_1() {
+    void subtract_start_1() {
         start = start - 1;
-        return start;
     };
 
     int print() const {
