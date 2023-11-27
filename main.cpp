@@ -67,5 +67,8 @@ int main(int argv, char** argc) {
             std::cout << counter.getStart() << std::endl;
         }
     } while (counter.oper != "х" && counter.oper != "Х" && counter.oper != "x" && counter.oper != "X");
+    {
+        std::cout << "До свидания!" << std::endl;
+    }
     return 0;
 }
