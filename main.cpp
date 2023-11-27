@@ -1,4 +1,5 @@
 #include <iostream>
+#include <limits>
 
 class Counter {
 private:
@@ -7,19 +8,17 @@ public:
     std::string answer;
     std::string oper;
 
-
     Counter() {
         this->start = 1;
     }
 
-    int getStart() const //геттер смотрим значение поля start
-    {
-        return start;
+    Counter(int inStart) {
+        this->start = inStart;
     }
 
-    void setStart(int value) //сеттер приравняем значение поле start к переменной value при этом поле start не изменится в классе
+    int getStart() const
     {
-        start = value;
+        return start;
     }
 
     void add() {
@@ -30,25 +29,30 @@ public:
         start = start - 1;
     };
 
-    int print() const {
-        return start;
-    }
-
 };
 
-int main() {
+int main(int argv, char** argc) {
     Counter counter;
-    int value;
+    int i;
     std::cout << "Вы хотите указать начальное значение счётчика? Введите да или нет: ";
     std::cin >> counter.answer;
-    if (counter.answer == "да") {
-        std::cout << "Введите начальное значение счётчика: ";
-        std::cin >> value;
-        counter.setStart(value);
+    if (counter.answer == "да" || counter.answer == "Да") {
+        while (true) {
+            std::cout << "Введите начальное значение счётчика: ";
+            std::cin >> i;
+            if(std::cin.fail()){
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "Это не число!" << std::endl;
+                continue;
+            }
+            break;
+        }
+        counter = Counter(i);
     } else {
         std::cout << "Начальное значение счетчика по умолчанию: ";
-        value = counter.getStart();
-        std::cout << value << std::endl;
+        i = counter.getStart();
+        std::cout << i << std::endl;
     }
     do {
         std::cout << "Введите команду ('+', '-', '=' или 'x'): ";
@@ -60,8 +64,8 @@ int main() {
             counter.subtract_start_1();
         }
         if (counter.oper == "=") {
-            std::cout << counter.print() << std::endl;
+            std::cout << counter.getStart() << std::endl;
         }
-    } while (counter.oper != "х");
+    } while (counter.oper != "х" && counter.oper != "Х" && counter.oper != "x" && counter.oper != "X");
     return 0;
 }
